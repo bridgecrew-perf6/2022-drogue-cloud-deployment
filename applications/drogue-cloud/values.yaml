@@ -1,0 +1,20 @@
+global:
+  cluster: openshift
+  domain: -drogue-iot.apps.one.of.my.clusters # override with GitOps
+
+drogueCloudCore:
+
+  defaults:
+    images:
+      tag: 0.8.1
+    logging:
+      debug: true
+
+  keycloak:
+    adminPassword: admin12 # override with GitOps
+    postgres:
+      mode: operator
+    identityProviders: {}
+
+  postgres:
+    password: admin12 # override with GitOps

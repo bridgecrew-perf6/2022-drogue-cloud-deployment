@@ -1,0 +1,18 @@
+apiVersion: v2
+name: drogue-sandbox
+description: The Drogue Sandbox installation
+
+type: application
+
+version: 0.1.0
+
+appVersion: "0.8.0"
+
+dependencies:
+  - name: drogue-cloud-common
+    repository: "@drogue-iot"
+    version: ^0.4.0
+  - name: drogue-cloud-core
+    alias: drogueCloudCore
+    repository: "@drogue-iot"
+    version: ^0.4.0
