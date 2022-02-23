@@ -1,9 +1,15 @@
 dependencies:
 - name: drogue-cloud-common
-  repository: https://drogue-iot.github.io/drogue-cloud-helm-charts/
-  version: 0.4.0
+  repository: file://../../external/drogue-cloud-helm-charts/charts/drogue-cloud-common
+  version: 0.5.0-alpha1
 - name: drogue-cloud-core
-  repository: https://drogue-iot.github.io/drogue-cloud-helm-charts/
-  version: 0.4.0
-digest: sha256:25be15410c1df61d6ab31e997e02dcf66b2c9009b68eee583a46ec71153c764e
-generated: "2021-12-01T14:44:45.390410588+01:00"
+  repository: file://../../external/drogue-cloud-helm-charts/charts/drogue-cloud-core
+  version: 0.5.0-alpha1
+- name: drogue-cloud-metrics
+  repository: file://../../external/drogue-cloud-helm-charts/charts/drogue-cloud-metrics
+  version: 0.5.0-alpha1
+- name: grafana
+  repository: https://grafana.github.io/helm-charts
+  version: 6.20.8
+digest: sha256:4e52b421141a75c91782444116bd19f90b611126a3649b2ce02b04b515a7e845
+generated: "2022-02-23T10:57:12.561694434+01:00"

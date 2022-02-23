@@ -10,16 +10,16 @@ appVersion: "0.9.0"
 
 dependencies:
   - name: drogue-cloud-common
-    repository: file:../external/drogue-cloud-helm-charts/charts/drogue-cloud-common
-    version: ^0.5.0
+    repository: file://../../external/drogue-cloud-helm-charts/charts/drogue-cloud-common
+    version: ^0.5.0-alpha1
   - name: drogue-cloud-core
     alias: drogueCloudCore
-    repository: file:../external/drogue-cloud-helm-charts/charts/drogue-cloud-core
-    version: ^0.5.0
+    repository: file://../../external/drogue-cloud-helm-charts/charts/drogue-cloud-core
+    version: ^0.5.0-alpha1
   - name: drogue-cloud-metrics
     alias: drogueCloudCore
-    repository: file:../external/drogue-cloud-helm-charts/charts/drogue-cloud-metrics
-    version: ^0.5.0
+    repository: file://../../external/drogue-cloud-helm-charts/charts/drogue-cloud-metrics
+    version: ^0.5.0-alpha1
   - name: grafana
     version: ~6.20.6
     repository: "https://grafana.github.io/helm-charts"
