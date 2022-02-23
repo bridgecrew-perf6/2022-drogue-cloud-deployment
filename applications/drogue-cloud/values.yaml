@@ -6,7 +6,8 @@ drogueCloudCore:
 
   defaults:
     images:
-      tag: 0.8.1
+      repository: quay.io/burrboard
+      tag: latest
     logging:
       debug: true
 
@@ -14,7 +15,81 @@ drogueCloudCore:
     adminPassword: admin12 # override with GitOps
     postgres:
       mode: operator
-    identityProviders: {}
+    identityProviders: {} # override with GitOps
 
   postgres:
     password: admin12 # override with GitOps
+
+  certificates:
+    generator:
+      enabled: false
+
+
+drogueCloudMetrics:
+
+  prometheus:
+    createInstance: false
+    podMonitors:
+      enabled: true
+
+  grafana:
+    datasource:
+      url: https://thanos-querier.openshift-monitoring.svc.cluster.local:9091/
+      tlsSkipVerify: false
+      token: "" # override with GitOps
+
+
+grafana:
+  testFramework:
+    enabled: false
+  securityContext: false
+  adminPassword: admin1234 # override with GitOps
+  rbac:
+    namespaced: true
+    pspEnabled: false
+  ingress:
+    enabled: true
+    hosts:
+      - metrics-drogue-iot.apps.cluster # override with GitOps
+    annotations:
+      route.openshift.io/termination: edge
+  labels:
+    app.kubernetes.io/component: metrics
+  podLabels:
+    app.kubernetes.io/component: metrics
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+    datasources:
+      enabled: true
+      label: grafana_datasource
+  extraInitContainers:
+    - name: cert-loader
+      image: docker.io/grafana/grafana:8.3.4
+      command:
+        - bash
+        - -ec
+        - |
+          cp -Rv /etc/ssl/certs/. /certs/
+      volumeMounts:
+        - name: certificates
+          mountPath: /certs
+  extraContainers: |
+    - name: cert-updater
+      image: docker.io/grafana/grafana:8.3.4
+      command:
+        - bash
+        - -ec
+        - |
+          while true; do
+            cp -pv /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt /etc/ssl/certs/
+            c_rehash
+            sleep 60
+          done
+      volumeMounts:
+        - name: certificates
+          mountPath: /etc/ssl/certs
+  extraEmptyDirMounts:
+    - name: certificates
+      mountPath: /etc/ssl/certs

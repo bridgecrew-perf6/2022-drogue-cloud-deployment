@@ -1,18 +1,25 @@
 apiVersion: v2
-name: drogue-sandbox
-description: The Drogue Sandbox installation
+name: drogue-summit
+description: The Drogue Cloud Summit installation
 
 type: application
 
 version: 0.1.0
 
-appVersion: "0.8.0"
+appVersion: "0.9.0"
 
 dependencies:
   - name: drogue-cloud-common
-    repository: "@drogue-iot"
-    version: ^0.4.0
+    repository: file:../external/drogue-cloud-helm-charts/charts/drogue-cloud-common
+    version: ^0.5.0
   - name: drogue-cloud-core
     alias: drogueCloudCore
-    repository: "@drogue-iot"
-    version: ^0.4.0
+    repository: file:../external/drogue-cloud-helm-charts/charts/drogue-cloud-core
+    version: ^0.5.0
+  - name: drogue-cloud-metrics
+    alias: drogueCloudCore
+    repository: file:../external/drogue-cloud-helm-charts/charts/drogue-cloud-metrics
+    version: ^0.5.0
+  - name: grafana
+    version: ~6.20.6
+    repository: "https://grafana.github.io/helm-charts"
