@@ -1,0 +1,15 @@
+{{- $ref := dict "root" . "name" "device-simulator" "component" "simulator" -}}
+kind: Service
+apiVersion: v1
+metadata:
+  name: device-simulator
+  labels:
+    {{- include "burrboard.labels" $ref | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    {{ include "burrboard.selectorLabels" $ref | nindent 4 }}
+  ports:
+    - port: 8080
+      targetPort: http
+      name: http

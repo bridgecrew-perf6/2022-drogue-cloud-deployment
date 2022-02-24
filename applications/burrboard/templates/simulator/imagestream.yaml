@@ -1,0 +1,8 @@
+{{- $ref := dict "root" . "name" "device-simulator" "component" "simulator" -}}
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: device-simulator
+  labels:
+    {{- include "burrboard.labels" $ref | nindent 4 }}
+spec: {}
