@@ -15,7 +15,7 @@ drogueCloudCore:
     adminPassword: admin12 # override with GitOps
     postgres:
       mode: operator
-    identityProviders: {} # override with GitOps
+    identityProviders: [] # override with GitOps
 
   postgres:
     password: admin12 # override with GitOps
