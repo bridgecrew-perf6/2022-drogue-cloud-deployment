@@ -1,0 +1,8 @@
+{{- $ref := dict "root" . "name" "doppelgaenger-websocket" "component" "doppelgaenger" -}}
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: doppelgaenger-websocket
+  labels:
+    {{- include "burrboard.labels" $ref | nindent 4 }}
+spec: {}

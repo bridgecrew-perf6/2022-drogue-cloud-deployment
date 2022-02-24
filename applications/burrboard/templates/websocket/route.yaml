@@ -1,0 +1,15 @@
+{{- $ref := dict "root" . "name" "doppelgaenger-websocket" "component" "doppelgaenger" -}}
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: dashboard
+  labels:
+    {{- include "burrboard.labels" $ref | nindent 4 }}
+spec:
+  to:
+    kind: Service
+    name: doppelgaenger-websocket
+  port:
+    targetPort: web
+  tls:
+    termination: edge

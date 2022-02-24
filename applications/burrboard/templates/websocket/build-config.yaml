@@ -1,0 +1,21 @@
+{{- $ref := dict "root" . "name" "doppelgaenger-websocket" "component" "doppelgaenger" -}}
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: doppelgaenger-websocket
+  labels:
+    {{- include "burrboard.labels" $ref | nindent 4 }}
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: doppelgaenger-websocket:latest
+  source:
+    git:
+      ref: main
+      uri: https://github.com/drogue-iot/drogue-doppelgaenger
+    contextDir: doppelgaenger-websocket
+  strategy:
+    dockerStrategy: {}
+  triggers:
+    - type: ConfigChange

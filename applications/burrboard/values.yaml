@@ -1,0 +1,9 @@
+kafka:
+  bootstrapServer: ""
+  topic: ""
+  username: ""
+  password: ""
+
+mongoDb:
+  database: twin-db
+  url: ""
