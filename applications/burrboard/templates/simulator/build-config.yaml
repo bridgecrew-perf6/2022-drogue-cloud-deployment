@@ -22,7 +22,11 @@ spec:
       ref: main
       uri: https://github.com/drogue-iot/burrboard
   strategy:
-    dockerStrategy: {}
     type: Docker
+    dockerStrategy:
+      buildArgs:
+        - name: ENDPOINT_URL
+          value: {{ .Values.simulator.mqttEndpointUrl | quote }}
+
   triggers:
     - type: ConfigChange

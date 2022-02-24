@@ -12,3 +12,6 @@ drogueCloud:
   application: ""
 
 simulatorUrl: ""
+
+simulator:
+  mqttEndpointUrl: ""
