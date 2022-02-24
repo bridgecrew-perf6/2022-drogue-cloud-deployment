@@ -7,3 +7,6 @@ kafka:
 mongoDb:
   database: twin-db
   url: ""
+
+drogueCloud:
+  application: ""

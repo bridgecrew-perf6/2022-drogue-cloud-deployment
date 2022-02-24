@@ -5,6 +5,7 @@ metadata:
   name: doppelgaenger-websocket
   annotations:
     image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"doppelgaenger-websocket:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"app\")].image"}]'
+    checksum/config: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
   labels:
     {{- include "burrboard.labels" $ref | nindent 4 }}
 spec:
@@ -28,20 +29,21 @@ spec:
           image: doppelgaenger-websocket
           imagePullPolicy: Always
           env:
-            - name: PASSWORD
+            - name: MONGODB__URL
               valueFrom:
                 secretKeyRef:
-                  #name: twindb-mongodb
-                  #key: mongodb-passwords
                   name: doppelgaegner-config
-                  key: mongodb.password
-            - name: MONGODB__URL
-              #value: mongodb://twin:$(PASSWORD)@twindb-mongodb-headless:27017/
-              value: mongodb+srv://drogue-iot:$(PASSWORD)@cluster0.kxq4o.mongodb.net/twin-db?retryWrites=true&w=majority
+                  key: mongodb.url
             - name: DATABASE
-              value: twin-db
+              valueFrom:
+                secretKeyRef:
+                  name: doppelgaegner-config
+                  key: mongodb.database
             - name: DROGUE_APP
-              value: burrboard
+              valueFrom:
+                secretKeyRef:
+                  name: doppelgaegner-config
+                  key: drogue.application
           ports:
             - containerPort: 8082
               name: web

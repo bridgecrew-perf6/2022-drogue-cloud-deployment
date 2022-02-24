@@ -5,6 +5,7 @@ metadata:
   name: doppelgaenger-input
   annotations:
     image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"doppelgaenger-input:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"app\")].image"}]'
+    checksum/config: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
   labels:
     {{ include "burrboard.labels" $ref | nindent 4 }}
 spec:
