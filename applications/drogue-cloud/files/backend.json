@@ -1,0 +1,13 @@
+{{- $sso := include "drogue-cloud-common.ingress.url" (dict "root" . "prefix" "api" "ingress" .Values.drogueCloudCore.services.api.ingress ) -}}
+{
+  "footer_band": [
+    "Need an account? <a href=\"{{ $sso }}/api/console/v1alpha1/ui/login?kc_idp_hint=github\">Sign in</a> with GitHub."
+  ],
+  "idps": [
+    {
+      "id": "github",
+      "label": "Sign in with GitHub",
+      "icon_html": "<i class=\"idp-icon fab fa-github\"></i>"
+    }
+  ]
+}

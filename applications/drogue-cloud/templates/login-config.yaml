@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: login-config
+data:
+{{ (.Files.Glob "files/note.html").AsConfig | indent 2 }}
+  backend.json: {{ tpl ( $.Files.Get "files/backend.json" ) . | toJson }}
