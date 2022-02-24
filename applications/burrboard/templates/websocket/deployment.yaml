@@ -29,6 +29,8 @@ spec:
           image: doppelgaenger-websocket
           imagePullPolicy: Always
           env:
+            - name: SIMULATOR_URL
+              value: {{ .Values.simulatorUrl }}
             - name: MONGODB__URL
               valueFrom:
                 secretKeyRef:
