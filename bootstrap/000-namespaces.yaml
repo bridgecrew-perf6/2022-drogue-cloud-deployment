@@ -1,0 +1,14 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: drogue-iot
+  annotations:
+    openshift.io/display-name: Drogue IoT Cloud deployment
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: burrboard
+  annotations:
+    openshift.io/display-name: Burrboard application

@@ -1,0 +1,105 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: cluster-tools
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: cert-syncer
+  namespace: cluster-tools
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: drogue-iot-cert-syncer-read-ingress
+  namespace: openshift-ingress
+rules:
+  - verbs:
+      - get
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+    resourceNames:
+      - summit-demo-dev-primary-cert-bundle-secret
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: drogue-iot-cert-syncer-read-ingress
+  namespace: openshift-ingress
+subjects:
+  - kind: ServiceAccount
+    name: cert-syncer
+    namespace: cluster-tools
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: drogue-iot-cert-syncer-read-ingress
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: drogue-iot-cert-syncer
+rules:
+  - verbs:
+      - update
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+    resourceNames:
+      - mqtt-endpoint-tls
+      - http-endpoint-tls
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: drogue-iot-cert-syncer
+  namespace: drogue-iot
+subjects:
+  - kind: ServiceAccount
+    name: cert-syncer
+    namespace: cluster-tools
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: drogue-iot-cert-syncer
+---
+kind: CronJob
+apiVersion: batch/v1beta1
+metadata:
+  name: sync-certs
+  namespace: cluster-tools
+spec:
+  schedule: 0 5 * * *
+  concurrencyPolicy: Forbid
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: kubectl
+              image: 'ghcr.io/ctron/kubectl:latest'
+              env:
+                - name: CERT_SECRET_NAME
+                  value: summit-demo-dev-primary-cert-bundle-secret
+              command:
+                - /bin/bash
+                - '-c'
+                - |
+                  function sync () {
+                    echo "Syncing: $1/$2 ..."
+                    kubectl get secret ${CERT_SECRET_NAME} -o json --namespace openshift-ingress | jq 'del(.metadata)' | jq ".metadata.name = \"$2\"" | kubectl replace -n "$1" -f  -
+                  }
+                  sync drogue-iot mqtt-endpoint-tls
+                  sync drogue-iot http-endpoint-tls
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
+          terminationGracePeriodSeconds: 30
+          serviceAccountName: cert-syncer
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
