@@ -2,7 +2,7 @@ Create (read) user:
 
 ```sql
 CREATE USER dashboard;
-ALTER USER dashbaord WITH PASSWORD 'reader-password';
+ALTER USER dashboard WITH PASSWORD 'reader-password';
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO dashboard;
 ```
 
@@ -11,24 +11,29 @@ Create (pusher) user:
 ```sql
 CREATE USER pusher;
 ALTER USER pusher WITH PASSWORD 'pusher-password';
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO pusher;
+GRANT INSERT ON ALL TABLES IN SCHEMA public TO pusher;
 ```
 
 Create the table:
 
 ```sql
-CREATE TABLE temperatures (
+CREATE TABLE devices (
     time TIMESTAMP WITH TIME ZONE NOT NULL,
 
     device_id VARCHAR(64) NOT NULL,
 
     temperature DOUBLE PRECISION NOT NULL,
-    humidity DOUBLE PRECISION,
-    battery DOUBLE PRECISION,
+    light DOUBLE PRECISION NOT NULL,
+    
+    button_a INTEGER NOT NULL,
+    button_b INTEGER NOT NULL,
 
-    lon NUMERIC,
-    lat NUMERIC
+    accelerometer_x DOUBLE PRECISION,
+    accelerometer_y DOUBLE PRECISION,
+    accelerometer_z DOUBLE PRECISION,
+
+    battery DOUBLE PRECISION
 );
 
-SELECT create_hypertable('temperatures', 'time', 'device_id', 2);
+SELECT create_hypertable('devices', 'time');
 ```
