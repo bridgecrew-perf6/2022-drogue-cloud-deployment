@@ -80,7 +80,7 @@ spec:
               value: float
 
             - name: FIELD_BATTERY
-              value: $.features.state.battery
+              value: $.features.device.battery
             - name: TYPE_FIELD_BATTERY
               value: float
 
