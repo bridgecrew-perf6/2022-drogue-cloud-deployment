@@ -40,7 +40,7 @@ spec:
               value: grafana-worldmap-panel
 
             - name: GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH
-              value: /var/lib/grafana/dashboards/grafana-dashboards-temperatures.json
+              value: /var/lib/grafana/dashboards/example.json
 
             - name: TIMESCALE_URL
               value: {{ .Values.tsdb.timescale.host }}:{{ .Values.tsdb.timescale.port }}
