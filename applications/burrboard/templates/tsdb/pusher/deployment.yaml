@@ -56,17 +56,17 @@ spec:
             - name: TYPE_FIELD_LIGHT
               value: float
 
-            - name: FIELD_ACCEL_X
+            - name: FIELD_ACCELEROMETER_X
               value: $.features.accelerometer.properties.x
-            - name: TYPE_FIELD_ACCEL_X
+            - name: TYPE_FIELD_ACCELEROMETER_X
               value: float
-            - name: FIELD_ACCEL_Y
+            - name: FIELD_ACCELEROMETER_Y
               value: $.features.accelerometer.properties.y
-            - name: TYPE_FIELD_ACCEL_Y
+            - name: TYPE_FIELD_ACCELEROMETER_Y
               value: float
-            - name: FIELD_ACCEL_Z
+            - name: FIELD_ACCELEROMETER_Z
               value: $.features.accelerometer.properties.z
-            - name: TYPE_FIELD_ACCEL_Z
+            - name: TYPE_FIELD_ACCELEROMETER_Z
               value: float
 
             - name: FIELD_BATTERY
