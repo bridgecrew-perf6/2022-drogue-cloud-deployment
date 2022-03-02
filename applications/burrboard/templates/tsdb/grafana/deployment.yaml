@@ -18,8 +18,7 @@ spec:
         app: grafana
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/tsdb/grafana/configmap.yaml") . | sha256sum }}
-        checksum/config-timescale: {{ include (print $.Template.BasePath "/tsdb/timescaledb/configmap.yaml") . | sha256sum }}
-        checksum/secret-timescale: {{ include (print $.Template.BasePath "/tsdb/timescaledb/secret.yaml") . | sha256sum }}
+        checksum/secret-timescale: {{ include (print $.Template.BasePath "/tsdb/secret.yaml") . | sha256sum }}
     spec:
       serviceAccountName: grafana
       containers:
