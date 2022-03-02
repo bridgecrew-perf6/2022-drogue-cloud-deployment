@@ -20,7 +20,6 @@ spec:
         checksum/config: {{ include (print $.Template.BasePath "/tsdb/grafana/configmap.yaml") . | sha256sum }}
         checksum/secret-timescale: {{ include (print $.Template.BasePath "/tsdb/secret.yaml") . | sha256sum }}
     spec:
-      serviceAccountName: grafana
       containers:
         - name: grafana
           image: {{ .Values.tsdb.grafana.image }}
@@ -83,7 +82,6 @@ spec:
               name: grafana-dashboard-providers
             - mountPath: /var/lib/grafana/dashboards
               name: grafana-dashboards
-      securityContext: {}
       volumes:
         - name: grafana-datasources
           configMap:
