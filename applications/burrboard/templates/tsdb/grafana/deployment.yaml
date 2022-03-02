@@ -1,0 +1,96 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+    app.kubernetes.io/part-of: tsbd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: grafana
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/tsdb/grafana/configmap.yaml") . | sha256sum }}
+        checksum/config-timescale: {{ include (print $.Template.BasePath "/tsdb/timescaledb/configmap.yaml") . | sha256sum }}
+        checksum/secret-timescale: {{ include (print $.Template.BasePath "/tsdb/timescaledb/secret.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: grafana
+      containers:
+        - name: grafana
+          image: {{ .Values.tsdb.grafana.image }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: grafana
+                  key: admin.password
+            - name: GF_ANALYTICS_REPORTING_ENABLED
+              value: "false"
+
+            - name: GF_LOG_LEVEL
+              value: "debug"
+
+            - name: GF_INSTALL_PLUGINS
+              value: grafana-worldmap-panel
+
+            - name: GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH
+              value: /var/lib/grafana/dashboards/grafana-dashboards-temperatures.json
+
+            - name: TIMESCALE_URL
+              value: {{ .Values.tsdb.timescale.host }}:{{ .Values.tsdb.timescale.port }}
+            - name: TIMESCALE_DATABASE
+              value: {{ .Values.tsdb.timescale.database | quote }}
+            - name: TIMESCALE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: timescaledb-secret
+                  key: reader.username
+            - name: TIMESCALE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: timescaledb-secret
+                  key: reader.password
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+          ports:
+            - containerPort: 3000
+              name: web
+              protocol: TCP
+          resources:
+            limits:
+              memory: 1Gi
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: grafana-datasources
+            - mountPath: /etc/grafana/provisioning/dashboards
+              name: grafana-dashboard-providers
+            - mountPath: /var/lib/grafana/dashboards
+              name: grafana-dashboards
+      volumes:
+        - name: grafana-datasources
+          configMap:
+            name: grafana-datasources
+        - name: grafana-dashboard-providers
+          configMap:
+            name: grafana-dashboard-providers
+        - name: grafana-dashboards
+          configMap:
+            name: grafana-dashboards
