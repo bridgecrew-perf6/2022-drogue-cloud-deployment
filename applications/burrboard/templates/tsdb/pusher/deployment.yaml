@@ -47,30 +47,40 @@ spec:
               value: {{ .Values.tsdb.pusher.table | quote }}
 
             - name: FIELD_TEMPERATURE
-              value: $.features.temperature.properties.value
+              value: $.features.temperature.value
             - name: TYPE_FIELD_TEMPERATURE
               value: float
 
             - name: FIELD_LIGHT
-              value: $.features.light.properties.value
+              value: $.features.light.value
             - name: TYPE_FIELD_LIGHT
               value: float
 
+            - name: FIELD_BUTTON_A
+              value: $.features.button_a.presses
+            - name: TYPE_BUTTON_A
+              value: int
+
+            - name: FIELD_BUTTON_B
+              value: $.features.button_b.presses
+            - name: TYPE_BUTTON_B
+              value: int
+
             - name: FIELD_ACCELEROMETER_X
-              value: $.features.accelerometer.properties.x
+              value: $.features.accelerometer.x
             - name: TYPE_FIELD_ACCELEROMETER_X
               value: float
             - name: FIELD_ACCELEROMETER_Y
-              value: $.features.accelerometer.properties.y
+              value: $.features.accelerometer.y
             - name: TYPE_FIELD_ACCELEROMETER_Y
               value: float
             - name: FIELD_ACCELEROMETER_Z
-              value: $.features.accelerometer.properties.z
+              value: $.features.accelerometer.z
             - name: TYPE_FIELD_ACCELEROMETER_Z
               value: float
 
             - name: FIELD_BATTERY
-              value: $.features.state.properties.battery
+              value: $.features.state.battery
             - name: TYPE_FIELD_BATTERY
               value: float
 
