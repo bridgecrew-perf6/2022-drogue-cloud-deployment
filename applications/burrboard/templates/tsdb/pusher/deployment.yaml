@@ -30,15 +30,15 @@ spec:
               value: 0.0.0.0:8080
 
             - name: POSTGRESQL__CONNECTION__HOST
-              value: {{ .Values.tsdb.timescale.host }}
+              value: {{ .Values.tsdb.timescale.host | quote }}
             - name: POSTGRESQL__CONNECTION__PORT
-              value: {{ .Values.tsdb.timescale.port }}
+              value: {{ .Values.tsdb.timescale.port | quote }}
             - name: POSTGRESQL__CONNECTION__DBNAME
-              value: {{ .Values.tsdb.timescale.database }}
+              value: {{ .Values.tsdb.timescale.database | quote  }}
             - name: POSTGRESQL__CONNECTION__USER
-              value: {{ .Values.tsdb.timescale.writer.username }}
+              value: {{ .Values.tsdb.timescale.writer.username | quote }}
             - name: POSTGRESQL__CONNECTION__PASSWORD
-              value: {{ .Values.tsdb.timescale.writer.password }}
+              value: {{ .Values.tsdb.timescale.writer.password | quote }}
 
             - name: POSTGRESQL__TIME_COLUMN
               value: time
