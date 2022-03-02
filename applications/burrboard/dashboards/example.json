@@ -1,35 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_TIMESCALEDB",
-      "label": "TimescaleDB",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "postgres",
-      "pluginName": "PostgreSQL"
-    }
-  ],
-  "__elements": [],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "8.4.2"
-    },
-    {
-      "type": "datasource",
-      "id": "postgres",
-      "name": "PostgreSQL",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -60,7 +29,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "${DS_TIMESCALEDB}"
+        "uid": "ed27e0bf-3b8a-413a-9bdd-be7dbab05612"
       },
       "fieldConfig": {
         "defaults": {
@@ -134,7 +103,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "${DS_TIMESCALEDB}"
+            "uid": "ed27e0bf-3b8a-413a-9bdd-be7dbab05612"
           },
           "format": "time_series",
           "group": [],
@@ -170,7 +139,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "${DS_TIMESCALEDB}"
+        "uid": "ed27e0bf-3b8a-413a-9bdd-be7dbab05612"
       },
       "fieldConfig": {
         "defaults": {
@@ -245,7 +214,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "${DS_TIMESCALEDB}"
+            "uid": "ed27e0bf-3b8a-413a-9bdd-be7dbab05612"
           },
           "format": "time_series",
           "group": [],
@@ -289,7 +258,7 @@
         "current": {},
         "datasource": {
           "type": "postgres",
-          "uid": "${DS_TIMESCALEDB}"
+          "uid": "ed27e0bf-3b8a-413a-9bdd-be7dbab05612"
         },
         "definition": "select distinct device_id from devices",
         "hide": 0,

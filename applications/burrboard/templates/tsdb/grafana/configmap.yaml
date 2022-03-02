@@ -13,6 +13,7 @@ data:
         database: $TIMESCALE_DATABASE
         url: $TIMESCALE_URL
         user: $TIMESCALE_USERNAME
+        uid: ed27e0bf-3b8a-413a-9bdd-be7dbab05612
         secureJsonData:
           password: $TIMESCALE_PASSWORD
         jsonData:
