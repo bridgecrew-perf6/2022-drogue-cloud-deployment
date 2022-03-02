@@ -83,6 +83,7 @@ spec:
               name: grafana-dashboard-providers
             - mountPath: /var/lib/grafana/dashboards
               name: grafana-dashboards
+      securityContext: {}
       volumes:
         - name: grafana-datasources
           configMap:
