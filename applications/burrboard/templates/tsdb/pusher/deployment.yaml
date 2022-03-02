@@ -47,25 +47,33 @@ spec:
               value: {{ .Values.tsdb.pusher.table | quote }}
 
             - name: FIELD_TEMPERATURE
-              value: $.temp
+              value: $.features.temperature.properties.value
             - name: TYPE_FIELD_TEMPERATURE
               value: float
+
+            - name: FIELD_LIGHT
+              value: $.features.light.properties.value
+            - name: TYPE_FIELD_LIGHT
+              value: float
+
+            - name: FIELD_ACCEL_X
+              value: $.features.accelerometer.properties.x
+            - name: TYPE_FIELD_ACCEL_X
+              value: float
+            - name: FIELD_ACCEL_Y
+              value: $.features.accelerometer.properties.y
+            - name: TYPE_FIELD_ACCEL_Y
+              value: float
+            - name: FIELD_ACCEL_Z
+              value: $.features.accelerometer.properties.z
+            - name: TYPE_FIELD_ACCEL_Z
+              value: float
+
             - name: FIELD_BATTERY
-              value: $.batt
+              value: $.features.state.properties.battery
             - name: TYPE_FIELD_BATTERY
               value: float
-            - name: FIELD_HUMIDITY
-              value: $.hum
-            - name: TYPE_FIELD_HUMIDITY
-              value: float
+
+            # from the headers
             - name: TAG_DEVICE_ID
               value: $.device
-
-            - name: FIELD_LAT
-              value: $.geoloc.lat
-            - name: TYPE_FIELD_LAT
-              value: float
-            - name: FIELD_LON
-              value: $.geoloc.lon
-            - name: TYPE_FIELD_LON
-              value: float
