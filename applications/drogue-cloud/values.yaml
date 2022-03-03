@@ -24,6 +24,12 @@ drogueCloudCore:
     generator:
       enabled: false
 
+  kafka:
+    externalAccess:
+      type: route
+      tls:
+        secret: http-endpoint-tls # we are re-using the cluster wildcard certificate here
+
 
 drogueCloudMetrics:
 
