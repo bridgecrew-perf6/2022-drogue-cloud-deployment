@@ -1,18 +1,3 @@
-Create (read) user:
-
-```sql
-CREATE USER dashboard;
-ALTER USER dashboard WITH PASSWORD 'reader-password';
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO dashboard;
-```
-
-Create (pusher) user:
-
-```sql
-CREATE USER pusher;
-ALTER USER pusher WITH PASSWORD 'pusher-password';
-GRANT INSERT ON ALL TABLES IN SCHEMA public TO pusher;
-```
 
 Create the table:
 
@@ -36,4 +21,20 @@ CREATE TABLE devices (
 );
 
 SELECT create_hypertable('devices', 'time');
+```
+
+Create (read) user:
+
+```sql
+CREATE USER dashboard;
+ALTER USER dashboard WITH PASSWORD 'reader-password';
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO dashboard;
+```
+
+Create (pusher) user:
+
+```sql
+CREATE USER pusher;
+ALTER USER pusher WITH PASSWORD 'pusher-password';
+GRANT INSERT ON ALL TABLES IN SCHEMA public TO pusher;
 ```
