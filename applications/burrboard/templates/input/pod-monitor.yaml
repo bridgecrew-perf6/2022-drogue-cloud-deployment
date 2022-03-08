@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "burrboard.selectorLabels" $ref | nindent 4 }}
+      {{- include "burrboard.selectorLabels" $ref | nindent 6 }}
   podMetricsEndpoints:
     - port: health
       path: /metrics
