@@ -17,12 +17,12 @@ spec:
       labels:
         app: grafana
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/tsdb/grafana/configmap.yaml") . | sha256sum }}
-        checksum/secret-timescale: {{ include (print $.Template.BasePath "/tsdb/secret.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/grafana/configmap.yaml") . | sha256sum }}
+        checksum/secret-timescale: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
     spec:
       containers:
         - name: grafana
-          image: {{ .Values.tsdb.grafana.image }}
+          image: {{ .Values.grafana.image }}
           imagePullPolicy: IfNotPresent
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD

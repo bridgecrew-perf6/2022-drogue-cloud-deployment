@@ -16,6 +16,16 @@ simulatorUrl: ""
 simulator:
   mqttEndpointUrl: ""
 
+grafana:
+  adminPassword: ""
+  image: "docker.io/grafana/grafana:8.4.2"
+  prometheus:
+    # SECRET=`oc get secret -n openshift-user-workload-monitoring | grep  prometheus-user-workload-token | head -n 1 | awk '{print $1 }'`
+    # TOKEN=`echo $(oc get secret $SECRET -n openshift-user-workload-monitoring -o json | jq -r '.data.token') | base64 -d`
+    # echo $TOKEN
+    token: ""
+    url: https://thanos-querier.openshift-monitoring.svc.cluster.local:9091/
+
 tsdb:
   drogueCloud:
     application: burrboard
@@ -30,10 +40,6 @@ tsdb:
 
   source:
     image: "ghcr.io/drogue-iot/drogue-event-source:0.1.1"
-
-  grafana:
-    adminPassword: ""
-    image: "docker.io/grafana/grafana:8.4.2"
 
   timescale:
     host: ""

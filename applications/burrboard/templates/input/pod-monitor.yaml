@@ -1,0 +1,16 @@
+{{- $ref := dict "root" . "name" "doppelgaenger-input" "component" "doppelgaenger" -}}
+kind: PodMonitor
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: drogue-pod-monitor
+  labels:
+    {{- include "burrboard.labels" $ref | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "burrboard.selectorLabels" $ref | nindent 4 }}
+  podMetricsEndpoints:
+    - port: health
+      path: /metrics
+      scheme: http
+      interval: 1s

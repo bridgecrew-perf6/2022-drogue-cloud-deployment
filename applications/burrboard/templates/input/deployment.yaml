@@ -67,3 +67,8 @@ spec:
                 secretKeyRef:
                   name: doppelgaegner-config
                   key: mongodb.url
+            - name: METRICS__BIND_ADDR
+              value: 0.0.0.0:8081
+          ports:
+            - containerPort: 8081
+              name: health

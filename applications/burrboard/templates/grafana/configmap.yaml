@@ -21,6 +21,19 @@ data:
           timescaledb: true
           postgresVersion: 1200
         editable: false
+      - name: drogue_metrics
+        type: prometheus
+        access: proxy
+        uid: eOVJftYnk
+        url: {{ .Values.grafana.prometheus.url | quote }}
+        basicAuth: false
+        isDefault: false
+        editable: false
+        jsonData:
+          tlsSkipVerify: {{ .Values.grafana.prometheus.tlsSkipVerify | default false }}
+          httpHeaderName1: "Authorization"
+        secureJsonData:
+          httpHeaderValue1: {{ ( printf "Bearer %s" .Values.grafana.prometheus.token ) | quote }}
 ---
 kind: ConfigMap
 apiVersion: v1
