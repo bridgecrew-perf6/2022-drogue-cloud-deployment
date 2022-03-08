@@ -21,7 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -83,7 +83,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "8.4.2",
       "targets": [
         {
           "datasource": {
@@ -145,7 +145,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "8.4.2",
       "targets": [
         {
           "datasource": {
@@ -207,7 +207,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "8.4.2",
       "targets": [
         {
           "datasource": {
@@ -281,7 +281,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "8.4.2",
       "targets": [
         {
           "datasource": {
@@ -342,7 +342,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "8.4.2",
       "targets": [
         {
           "datasource": {
@@ -404,7 +404,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "8.4.2",
       "targets": [
         {
           "datasource": {
@@ -478,7 +478,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "8.4.2",
       "targets": [
         {
           "datasource": {
@@ -567,7 +567,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "8.4.2",
       "targets": [
         {
           "datasource": {
@@ -601,7 +601,7 @@
       "type": "gauge"
     }
   ],
-  "refresh": false,
+  "refresh": "5s",
   "schemaVersion": 35,
   "style": "dark",
   "tags": [],
