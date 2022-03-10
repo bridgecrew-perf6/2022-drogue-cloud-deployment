@@ -30,9 +30,9 @@ spec:
               value: 0.0.0.0:8080
 
             - name: POSTGRESQL__CONNECTION__HOST
-              value: {{ .Values.tsdb.timescale.host | quote }}
+              value: {{ include "burrboard.timescaledb.host" . }}
             - name: POSTGRESQL__CONNECTION__PORT
-              value: {{ .Values.tsdb.timescale.port | quote }}
+              value: {{ include "burrboard.timescaledb.port" . }}
             - name: POSTGRESQL__CONNECTION__DBNAME
               value: {{ .Values.tsdb.timescale.database | quote  }}
             - name: POSTGRESQL__CONNECTION__USER

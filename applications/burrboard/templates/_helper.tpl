@@ -18,3 +18,19 @@ app.kubernetes.io/name: {{ .name }}
 app.kubernetes.io/component: {{ .component }}
 app.kubernetes.io/instance: {{ .root.Values.coreReleaseName | default .root.Release.Name }}
 {{- end }}
+
+{{- define "burrboard.timescaledb.host" }}
+{{- if .Values.tsdb.timescale.deployment.enabled }}
+timescaledb
+{{- else }}
+{{ .Values.tsdb.timescale.host | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "burrboard.timescaledb.port" }}
+{{- if .Values.tsdb.timescale.deployment.enabled }}
+"5432"
+{{- else }}
+{{ .Values.tsdb.timescale.port | quote }}
+{{- end }}
+{{- end }}
