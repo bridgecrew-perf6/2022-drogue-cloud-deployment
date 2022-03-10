@@ -1,0 +1,21 @@
+{{- if .Values.tsdb.timescale.deployment.enabled }}
+{{- $ref := dict "root" . "name" "timescaledb" "component" "tsdb" -}}
+kind: Service
+apiVersion: v1
+metadata:
+  name: timescaledb
+  labels:
+    {{- include "burrboard.labels" $ref | nindent 4 }}
+spec:
+  selector:
+    {{- include "burrboard.selectorLabels" $ref | nindent 4 }}
+
+  type: ClusterIP
+
+  ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+
+{{- end }}

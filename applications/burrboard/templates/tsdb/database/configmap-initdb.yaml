@@ -1,0 +1,14 @@
+{{- if .Values.tsdb.timescale.deployment.enabled }}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: timescaledb-initdb
+  labels:
+    app: timescaledb
+data:
+  {{ range $path, $_ :=  .Files.Glob  "scripts/timescaledb/*" }}
+  {{ base $path }}: |
+  {{- $.Files.Get $path | nindent 4 }}
+  {{ end }}
+
+{{- end }}
