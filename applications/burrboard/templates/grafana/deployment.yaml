@@ -43,7 +43,7 @@ spec:
               value: /var/lib/grafana/dashboards/example.json
 
             - name: TIMESCALE_URL
-              value: {{ .Values.tsdb.timescale.host }}:{{ .Values.tsdb.timescale.port }}
+              value: "{{ include "burrboard.timescaledb.host" . }}:{{ include "burrboard.timescaledb.port" . }}"
             - name: TIMESCALE_DATABASE
               value: {{ .Values.tsdb.timescale.database | quote }}
             - name: TIMESCALE_USERNAME
